@@ -7,12 +7,9 @@ import java.nio.file.Path;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 /**
  * The Parser class for parsing raw documents and cleaning them up
- *
  * @author  Karan Tyagi
  * @version 1.0
  * @since   2018-03-18
@@ -171,7 +168,6 @@ public class Parser {
         doc.getElementsByAttributeValueStarting("href", "//").removeAttr("href");
         doc.getElementsByAttributeValueStarting("href", "/w/index.php").remove();
 
-
         // REMOVING NAVIGATIONAL COMPONENTS
         doc.getElementsByAttributeValueStarting("href", "#").remove();
         doc.getElementsByAttributeValueStarting("id", "jump-to-nav").remove();
@@ -204,9 +200,7 @@ public class Parser {
         fr.close();
     }
 
-
     private static String parseText(String option, String text) {
-
 
         String noExtraSpaces = new String(text);
         // removing tabs(extra space) and replacing it by space
@@ -273,7 +267,7 @@ public class Parser {
                 .replaceAll("\\s{2,}", " ")
                 .replaceAll("[^\\p{ASCII}]", "")
                 .replaceAll("(?<![0-9a-zA-Z])[\\p{Punct}]", "")
-                .replaceAll("(?<![0-9])[^\\P{P}-](?![0-9])", "")
+                .replaceAll("(?<![0-9])[^\\P{P}-](?![0-9])", "") // retain hyphens in text
                 //.replaceAll("(?<![0-9])[\\p{Punct}](?![0-9])", "")
                 .replaceAll("[\\p{Punct}](?![0-9a-zA-Z])", "");
 

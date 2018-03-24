@@ -1,31 +1,20 @@
 CS-6200 Information Retrieval, Spring 2018
 Assignment 3
 Author : Karan Tyagi
------------------------------------------------------------------------
-Installation 
+=============================================================================================================================
+Installation and Setup
 
-Install java Or jdk 1.8.0_151
 
-java 8 ??
 
-RUN as maven project 
-
-Library : Maven jsoup
-
-<dependency>
-        <groupId>org.jsoup</groupId>
-        <artifactId>jsoup</artifactId>
-        <version>1.11.2</version>
-    </dependency>
-
-and API uasage - issue with lambda expressions etc.  etc.
 
 Add jdk to path : ???
 $ set path=C:\Program Files\Java\jdk1.8.0_151\bin
 
-Go to Karan_Tyagi_HW3\code\ir
-Open 'ir' in KaranTyagi  as Maven Project  (??? in IntellJ or Eclipse)
------------------------------------------------------------------------
+- Navigate Karan_Tyagi_HW3\code\ir
+- open IntelliJ or eclipse IDE
+- Import 'ir' as Maven Project  (??? CROSS CHECK in eclipse and IntelliJ)
+
+=============================================================================================================================
 
 Compiling and running the programs :
  _______________________
@@ -33,10 +22,13 @@ Compiling and running the programs :
 |    TASK 1 - PARSING	|
 |_______________________|
 
+- Open Terminal
+- Navigate to Karan_Tyagi_HW3\code
+????
 - Navigate to:  ir\src\main\java\parser 
-- Add the following to Program Arguments (command line arguments)
+- Run the following command:
 
-"<sourceDirectoryPath>" "<outputDirectoryPath>" "<parsingOption>"
+$ java -cp ir.jar parser.Parser "<sourceDirectoryPath>" "<outputDirectoryPath>" "<parsingOption>"
 
 - source directory path should be valid and directory should have only text files
 - output directory should be empty
@@ -46,29 +38,33 @@ Compiling and running the programs :
   # "de-punctuate" : perform de-punctuation only
 - If you don't specify <parsingOption>, it is assumed to be "default".
 
-Example usage:
+--- EXAMPLE USAGE ---
 
-"E:\IR\HW3\test docs" "E:\IR\HW3\final corpus"
-"E:\IR\HW3\test docs" "E:\IR\HW3\final corpus" "default"
+$ java -cp ir.jar parser.Parser "E:\IR\HW3\test docs" "E:\IR\HW3\final corpus"
+$ java -cp ir.jar parser.Parser "E:\IR\HW3\test docs" "E:\IR\HW3\final corpus" "default"
 
 >> Above two examples are doing the same thing
 
-"E:\IR\HW3\test docs" "E:\IR\HW3\final corpus" "de-punctuate"
-"E:\IR\HW3\test_docs" "E:\IR\HW3\final corpus" "casefold"
+$ java -cp ir.jar parser.Parser "E:\IR\HW3\test docs" "E:\IR\HW3\final corpus" "de-punctuate"
+$ java -cp ir.jar parser.Parser "E:\IR\HW3\test_docs" "E:\IR\HW3\final corpus" "casefold"
 
-EXPECTED OUTPUT:
+--- EXPECTED OUTPUT ---
+
 On running the Parser program, clean files are created in <outputDirectory>, corresponding to source files.
 These files are the clean corpus.
 
+=============================================================================================================================
  ____________________________________________
 |					     |
 |    TASK 2 - CREATING INVERTED INDEXES	     |
 |____________________________________________|
 
+- Open Terminal
+- Navigate to Karan_Tyagi_HW3\code
 - Navigate to:  ir\src\main\java\indexer
-- Add the following to Program Arguments (command line arguments)
+- Run the following command:
 
-"<CleanCorpusDirectoryPath>" "<OutputDirectoryPath>"<n-Gram> <PostingType>
+$ java -jar ir.jar "<CleanCorpusDirectoryPath>" "<OutputDirectoryPath>"<n-Gram> <PostingType>
 
 - Clean corpus directory path should have only parsed (and clean) text files
 - Output directory path is the path of directory where you want the outputs(indexes,tables)
@@ -82,76 +78,102 @@ These files are the clean corpus.
 
 - If you don't specify <postingType>, default postingType "termfreq" is assumed
 
-Example usage:
+--- EXAMPLE USAGE ---
 
-"E:\IR\HW3\final corpus" "E:\IR\HW3\output" 1 
-"E:\IR\HW3\final corpus" "E:\IR\HW3\output" 1 "termfreq"
+$ java -jar ir.jar "E:\IR\HW3\final corpus" "E:\IR\HW3\output" 1 
+$ java -jar ir.jar "E:\IR\HW3\final corpus" "E:\IR\HW3\output" 1 "termfreq"
 
 >> Above two examples are doing the same thing
 
-==============================================================================================================
+============================================================================================================================
  _______________
 |		|
-|    TASK 2C	|
-|_______________|
+|    TASK 2C	|   Generating 3 inverted indexes corresponding to terms as word n-grams (n=1,2,3)
+|_______________|  
 
 Run the indexer program thrice with program arguments as follows:
- commands for generating 3 inverted indexes corresponding to terms as word n-grams (n=1,2,3)
 
-$ java indexer "<CleanCorpusDirectoryPath>" "<OutputDirectoryPath>" 1
-$ java indexer "<CleanCorpusDirectoryPath>" "<OutputDirectoryPath>" 2
-$ java indexer "<CleanCorpusDirectoryPath>" "<OutputDirectoryPath>" 3
+$ java -jar ir.jar  "<CleanCorpusDirectoryPath>" "<OutputDirectoryPath>" 1
+$ java -jar ir.jar  "<CleanCorpusDirectoryPath>" "<OutputDirectoryPath>" 2
+$ java -jar ir.jar  "<CleanCorpusDirectoryPath>" "<OutputDirectoryPath>" 3
 
-Expected Output	:
---- files woulb be saved in directory ... / / ...
+--- EXPECTED OUTPUT ---
 
-==============================================================================================================
-TASK 2-D 
-Run the following command for generating inverted index with term positions (for term as unigram)
-==============================================================================================================
-$ java indexer "E:\IR\HW3\final corpus" 1 "tf+positions"
+On running the Indexer program with the above arguments, following files will be created in <outputDirectoryPath>
 
-Expected Output: ???
+/Task2/2B
+1) DocLengths_for_1-grams.txt
+2) DocLengths_for_2-grams.txt
+3) DocLengths_for_3-grams.txt
+Tables containing number of terms(unigram, bigram and trigram respectively) in each document.
 
-___________________________________________________________________________________________________________________
+/Task2/2C/
+1) invertedIndex_for_1-grams.txt
+2) invertedIndex_for_2-grams.txt
+3) invertedIndex_for_3-grams.txt
+Inverted Indexes corresponding to 3 runs (unigram, bigram and trigram respectively).
 
+/Task3/3-1
+1) termFreqTable_for_1-grams.txt
+2) termFreqTable_for_2-grams.txt
+3) termFreqTable_for_3-grams.txt
+Term frequency tables sorted from most to least frequent terms.
+
+/Task3/3-2
+1) docFreqTable_for_1-grams.txt
+2) docFreqTable_for_2-grams.txt
+3) docFreqTable_for_3-grams.txt
+Document frequency tables sorted lexiographically by terms.
+
+============================================================================================================================
+ _______________
+|		|
+|    TASK 2D	|   Generating Unigram inverted index with term positions
+|_______________|  
+
+Run the indexer program with program arguments as follows:
+
+$ java -jar ir.jar "<CleanCorpusDirectoryPath>" "<OutputDirectoryPath>" 1 "tf+positions"
+
+--- EXPECTED OUTPUT ---
+
+On running the Indexer program with the above given arguments,
+the following file is created:
+
+/Task2/2D/unigramInvertedIndexWithTermPositions.txt
+
+This file contains inverted index of the format Term -> [docID, tf, [termPositions]]
+
+============================================================================================================================
 Sources used :
 
-https://docs.python.org/3/library/
-____________________________________________________________________________________________________________________
+- jsoup
+- javadoc oracle
+- regex
 
-DIRECTORY STRUCTURE : 
+============================================================================================================================
+Submission : Directory Structure
 
-FOLDER	|	DELIVERABLES		|									|
---------|-------------------------------|------------------------------------------------------------------ 	|
-TASK1	|	G1.txt			|    Graph for Task 1-A							|
-	|	G2.txt			|    Graph for Task 1-A							|
-	|       STATISTICS_REPORT_TASK1	|    Simple Statistics for G1 and G2					|
-	|				|									|
-TASK 2	|	src 			|    Folder containing source code for page rank implementation		|
-	|	G1-Perplexities.txt	|    Perxplexity values in each round, till convergence(for G1) 	|
-	|   	G2-Perplexities.txt   	|    Perxplexity values in each round, till convergence(for G2) 	|
-	|   	G1_Top50PageRanks.txt  	|    Top 50 pages from G1 - docID and pageRank 				|
-	|   	G2_Top50PageRanks.txt  	|    Top 50 pages from G2 - docID and pageRank				|
-	|   	G1_Top50Inlinks.txt   	|    Top 50 pages from G1 - docID and inlink count 			|
-	|   	G2_Top50Inlinks.txt   	|    Top 50 pages from G2 - docID and inlink count			|
-	|   	Task-2C_report.txt   	|    Comparison report for Task 2-C					|
-______________________________________________________________________________________________________________________
+code	| /ir	| Maven Project (source code)	      
+			      
+Task2	| /2B 	| 3 files as discussed above  
+	| /2C	| 3 files as discussed above  
+	| /2D   | 1 file  as discussed above
 
-DESCRIPTION :
+Task3	| /3-1 	| 3 files as discussed above  
+	| /3-2	| 3 files as discussed above 
+	|       |
+	| /3-3	| StopListAnalysisFiles : 3 files (for n-grams n=1,2,3) - contains the following columns : Term, tf, df
+	|	| term as fraction of total terms in corpus
+	|   	| explaination.txt : explaining cutoff thresholds for stoplists
+	|       | stopList_for_1-grams.txt 
+	|       | stopList_for_2-grams.txt
+	|       | stopList_for_3-grams.txt
+_______________________________________________________
 
-G1.txt and G2.txt are the graphs generated from BFS and DFS respectively. 
-The graph follows the pattern 
+DESIGN CHOICES ????????
 
-D1 D2 D3 D4
-D2 D5 D6
-D3 D7 D8
-
-Where, D1 is the webpage docID which is the article title directly extracted from the URL (e.g., Solar_Eclipse is the docID for https://en.wikipedia.org/wiki/Solar_Eclipse). Each line indicates the in-link relationship, which means that D1 has three in-coming links from D2, D3, and D4 respectively.
-
-The file "STATISTICS_REPORT_TASK1" has the statistics for G1 and G2 with the no. of pages with no inLinks and no. of pages with no outLinks.
-
-The file "Task-2C_report.txt" examines the Top 10 page rank and the Top 10 by inLink counts for G1 and G2. 
-It also discusses the effect on ranking upon changing the damping factor.
-
-______________________________________________________________________________________________________________________
+Map faster;
+Interface ??
+HashMap
+_____________________________________________________________________________________________________________________

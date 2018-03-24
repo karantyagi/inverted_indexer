@@ -1,6 +1,5 @@
 package indexer;
 
-import com.sun.xml.internal.ws.api.ha.StickyFeature;
 
 import java.io.*;
 import java.nio.charset.Charset;
@@ -125,12 +124,22 @@ public class Indexer {
                 totalterms += value;
             }
 
+            float cutoff = 0.5f;
+            if(termLength==1)
+                cutoff = 0.45f;
+            if(termLength==2)
+                cutoff = 0.33f;
+            if(termLength==3)
+                cutoff=0.25f;
+
             for (Map.Entry<String, Integer> entry : sortedTermFreqTable.entrySet()) {
                 String key = entry.getKey().toString();
                 Integer value = entry.getValue();
                 //System.out.printf("%4d   %-40s  %5d  %5.3f", counter, key, value,(value*100.0)/totalterms);
-                l.add(String.format("%4d  %-40s  %5d     %5.2f", counter, key, value,(value*100.0)/totalterms));
-               counter++;
+                if(sortedDocFreqTable.get(key).size()>=(corpusSize*cutoff)){
+                    l.add(String.format("%4d  %-40s  %5d    %5d    %5.2f", counter, key, value,sortedDocFreqTable.get(key).size(),(value*100.0)/totalterms));
+                    counter++;
+                }
             }
             try{
                 Path file = Paths.get(outputDirectory+"\\AnalyzeStopList_for_"+Integer.toString(termLength)+"-grams.txt");

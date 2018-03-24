@@ -1,0 +1,5 @@
+indexer/Indexer.class
+parser/Parser.class
+indexer/PostingType2.class
+indexer/Posting.class
+indexer/PostingType1.class
