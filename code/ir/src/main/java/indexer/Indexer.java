@@ -113,7 +113,7 @@ public class Indexer {
            writeDocFrequencyTable(sortedDocFreqTable);
 
            /* analyze rate of change of tf */
-
+           /*
            System.out.println();
            int counter =1;
            float totalterms = 0;
@@ -149,7 +149,7 @@ public class Indexer {
             {
                 e.printStackTrace();
             }
-
+            */
 
         }
     }

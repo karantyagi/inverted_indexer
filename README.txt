@@ -24,8 +24,6 @@ Compiling and running the programs :
 
 - Open Terminal
 - Navigate to Karan_Tyagi_HW3\code
-????
-- Navigate to:  ir\src\main\java\parser 
 - Run the following command:
 
 $ java -cp ir.jar parser.Parser "<sourceDirectoryPath>" "<outputDirectoryPath>" "<parsingOption>"
@@ -40,13 +38,13 @@ $ java -cp ir.jar parser.Parser "<sourceDirectoryPath>" "<outputDirectoryPath>" 
 
 --- EXAMPLE USAGE ---
 
-$ java -cp ir.jar parser.Parser "E:\IR\HW3\test docs" "E:\IR\HW3\final corpus"
-$ java -cp ir.jar parser.Parser "E:\IR\HW3\test docs" "E:\IR\HW3\final corpus" "default"
+$ java -cp hw3-1.0-SNAPSHOT-jar-with-dependencies.jar parser.Parser "E:\IR\HW3\test docs" "E:\IR\HW3\final corpus"
+$ java -cp hw3-1.0-SNAPSHOT-jar-with-dependencies.jar parser.Parser "E:\IR\HW3\test docs" "E:\IR\HW3\final corpus" "default"
 
 >> Above two examples are doing the same thing
 
-$ java -cp ir.jar parser.Parser "E:\IR\HW3\test docs" "E:\IR\HW3\final corpus" "de-punctuate"
-$ java -cp ir.jar parser.Parser "E:\IR\HW3\test_docs" "E:\IR\HW3\final corpus" "casefold"
+$ java -cp hw3-1.0-SNAPSHOT-jar-with-dependencies.jar parser.Parser "E:\IR\HW3\test docs" "E:\IR\HW3\final corpus" "de-punctuate"
+$ java -cp hw3-1.0-SNAPSHOT-jar-with-dependencies.jar parser.Parser "E:\IR\HW3\test_docs" "E:\IR\HW3\final corpus" "casefold"
 
 --- EXPECTED OUTPUT ---
 
@@ -61,27 +59,28 @@ These files are the clean corpus.
 
 - Open Terminal
 - Navigate to Karan_Tyagi_HW3\code
-- Navigate to:  ir\src\main\java\indexer
 - Run the following command:
 
-$ java -jar ir.jar "<CleanCorpusDirectoryPath>" "<OutputDirectoryPath>"<n-Gram> <PostingType>
+$ java -jar hw3-1.0-SNAPSHOT-jar-with-dependencies.jar <"CleanCorpusDirectoryPath"> <"OutputDirectoryPath"> <n-Gram> <"PostingType">
 
-- Clean corpus directory path should have only parsed (and clean) text files
-- Output directory path is the path of directory where you want the outputs(indexes,tables)
+- "CleanCorpusDirectoryPath" : Path to the directory having cleaned files
+   (clean corpus directory should have only parsed (and clean) text files)
+
+- "OutputDirectoryPath" :  path to the directory where you want the outputs(indexes,tables)
+
 - n-Gram (int)
   # 1 : Term as word unigram
   # 2 : Term as word bigram
   # 3 : Term as word trigram
-- postingType
+
+- postingType(String) : Optional argument, default is "termfreq" 
   # "termfreq"     : Posting format is [DocID(String), TermFrequency(int)]	
   # "tf+positions" : Posting format is [DocID(String), TermFrequency(int), TermPositions[List<Integer>]]
 
-- If you don't specify <postingType>, default postingType "termfreq" is assumed
-
 --- EXAMPLE USAGE ---
 
-$ java -jar ir.jar "E:\IR\HW3\final corpus" "E:\IR\HW3\output" 1 
-$ java -jar ir.jar "E:\IR\HW3\final corpus" "E:\IR\HW3\output" 1 "termfreq"
+$ java -jar hw3-1.0-SNAPSHOT-jar-with-dependencies.jar "E:\IR\HW3\final corpus" "E:\IR\HW3\output" 1 
+$ java -jar hw3-1.0-SNAPSHOT-jar-with-dependencies.jar "E:\IR\HW3\final corpus" "E:\IR\HW3\output" 1 "termfreq"
 
 >> Above two examples are doing the same thing
 
@@ -93,9 +92,9 @@ $ java -jar ir.jar "E:\IR\HW3\final corpus" "E:\IR\HW3\output" 1 "termfreq"
 
 Run the indexer program thrice with program arguments as follows:
 
-$ java -jar ir.jar  "<CleanCorpusDirectoryPath>" "<OutputDirectoryPath>" 1
-$ java -jar ir.jar  "<CleanCorpusDirectoryPath>" "<OutputDirectoryPath>" 2
-$ java -jar ir.jar  "<CleanCorpusDirectoryPath>" "<OutputDirectoryPath>" 3
+$ java -jar hw3-1.0-SNAPSHOT-jar-with-dependencies.jar <"CleanCorpusDirectoryPath"> <"OutputDirectoryPath"> 1
+$ java -jar hw3-1.0-SNAPSHOT-jar-with-dependencies.jar <"CleanCorpusDirectoryPath"> <"OutputDirectoryPath"> 2
+$ java -jar hw3-1.0-SNAPSHOT-jar-with-dependencies.jar <"CleanCorpusDirectoryPath"> <"OutputDirectoryPath"> 3
 
 --- EXPECTED OUTPUT ---
 
@@ -133,7 +132,7 @@ Document frequency tables sorted lexiographically by terms.
 
 Run the indexer program with program arguments as follows:
 
-$ java -jar ir.jar "<CleanCorpusDirectoryPath>" "<OutputDirectoryPath>" 1 "tf+positions"
+$ java -jar hw3-1.0-SNAPSHOT-jar-with-dependencies.jar <"CleanCorpusDirectoryPath"> <"OutputDirectoryPath"> 1 "tf+positions"
 
 --- EXPECTED OUTPUT ---
 
