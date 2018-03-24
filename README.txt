@@ -1,22 +1,11 @@
+
 CS-6200 Information Retrieval, Spring 2018
 Assignment 3
 Author : Karan Tyagi
-=============================================================================================================================
-Installation and Setup
-
-
-
-
-Add jdk to path : ???
-$ set path=C:\Program Files\Java\jdk1.8.0_151\bin
-
-- Navigate Karan_Tyagi_HW3\code\ir
-- open IntelliJ or eclipse IDE
-- Import 'ir' as Maven Project  (??? CROSS CHECK in eclipse and IntelliJ)
 
 =============================================================================================================================
 
-Compiling and running the programs :
+Compiling and running the programs:
  _______________________
 |			|
 |    TASK 1 - PARSING	|
@@ -24,9 +13,9 @@ Compiling and running the programs :
 
 - Open Terminal
 - Navigate to Karan_Tyagi_HW3\code
-- Run the following command:
+- Use the jar provided by running:
 
-$ java -cp ir.jar parser.Parser "<sourceDirectoryPath>" "<outputDirectoryPath>" "<parsingOption>"
+$ java -cp hw3-1.0-SNAPSHOT-jar-with-dependencies.jar parser.Parser "<sourceDirectoryPath>" "<outputDirectoryPath>" "<parsingOption>"
 
 - source directory path should be valid and directory should have only text files
 - output directory should be empty
@@ -73,15 +62,14 @@ $ java -jar hw3-1.0-SNAPSHOT-jar-with-dependencies.jar <"CleanCorpusDirectoryPat
   # 2 : Term as word bigram
   # 3 : Term as word trigram
 
-- postingType(String) : Optional argument, default is "termfreq" 
-  # "termfreq"     : Posting format is [DocID(String), TermFrequency(int)]	
+- postingType(String) : Optional argument, default is "termFreq" 
+  # "termFreq"     : Posting format is [DocID(String), TermFrequency(int)]	
   # "tf+positions" : Posting format is [DocID(String), TermFrequency(int), TermPositions[List<Integer>]]
 
 --- EXAMPLE USAGE ---
 
 $ java -jar hw3-1.0-SNAPSHOT-jar-with-dependencies.jar "E:\IR\HW3\final corpus" "E:\IR\HW3\output" 1 
-$ java -jar hw3-1.0-SNAPSHOT-jar-with-dependencies.jar "E:\IR\HW3\final corpus" "E:\IR\HW3\output" 1 "termfreq"
-
+$ java -jar hw3-1.0-SNAPSHOT-jar-with-dependencies.jar "E:\IR\HW3\final corpus" "E:\IR\HW3\output" 1 "termFreq"
 >> Above two examples are doing the same thing
 
 ============================================================================================================================
@@ -146,9 +134,8 @@ This file contains inverted index of the format Term -> [docID, tf, [termPositio
 ============================================================================================================================
 Sources used :
 
-- jsoup
-- javadoc oracle
-- regex
+- https://jsoup.org/
+- https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html
 
 ============================================================================================================================
 Submission : Directory Structure
@@ -168,11 +155,21 @@ Task3	| /3-1 	| 3 files as discussed above
 	|       | stopList_for_1-grams.txt 
 	|       | stopList_for_2-grams.txt
 	|       | stopList_for_3-grams.txt
-_______________________________________________________
+============================================================================================================================
+DESIGN CHOICES
 
-DESIGN CHOICES ????????
+To maintain clarity, I have solved the assignment in two logical parts.
+There are two modules - a parser and an indexer.
+The parser consumes raw documents and performs text preprocessing and cleans the documents.
+The clean corpus is fed to the indexer which tokenizes each doc and creates an inverted index and other relevant tables.
+Tables created by the indexer are used for analyzing terms and their tf, dfs for creating a stop list.
 
-Map faster;
-Interface ??
-HashMap
+The indexer module can be extened to generate inverted indexes of any posting format becuase of the Posting interface.
+The two posting types (docId, termfreq) and  (docId, termfreq, termpositions) are very easily implemented by making relevant 
+classes which implement Posting interface.
+
+To reduce seek time, Maps have been used. HashMap implementation provides fast operations and use less memory.
+Use of Lambda functions and Streams made the code cleaner and allow parallelsim which reduced the program run time.
+
+============================================================================================================================
 _____________________________________________________________________________________________________________________
