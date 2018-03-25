@@ -1,10 +1,7 @@
-
 CS-6200 Information Retrieval, Spring 2018
-Assignment 3
-Author : Karan Tyagi
+Author: Karan Tyagi
 
 =============================================================================================================================
-
 Compiling and running the programs:
  _______________________
 |			|
@@ -12,7 +9,7 @@ Compiling and running the programs:
 |_______________________|
 
 - Open Terminal
-- Navigate to Karan_Tyagi_HW3\code
+- Navigate to \code
 - Use the jar provided by running:
 
 $ java -cp hw3-1.0-SNAPSHOT-jar-with-dependencies.jar parser.Parser "<sourceDirectoryPath>" "<outputDirectoryPath>" "<parsingOption>"
@@ -39,7 +36,6 @@ $ java -cp hw3-1.0-SNAPSHOT-jar-with-dependencies.jar parser.Parser "E:\IR\HW3\t
 
 On running the Parser program, clean files are created in <outputDirectory>, corresponding to source files.
 These files are the clean corpus.
-
 =============================================================================================================================
  ____________________________________________
 |					     |
@@ -47,7 +43,7 @@ These files are the clean corpus.
 |____________________________________________|
 
 - Open Terminal
-- Navigate to Karan_Tyagi_HW3\code
+- Navigate to \code
 - Run the following command:
 
 $ java -jar hw3-1.0-SNAPSHOT-jar-with-dependencies.jar <"CleanCorpusDirectoryPath"> <"OutputDirectoryPath"> <n-Gram> <"PostingType">
@@ -71,7 +67,6 @@ $ java -jar hw3-1.0-SNAPSHOT-jar-with-dependencies.jar <"CleanCorpusDirectoryPat
 $ java -jar hw3-1.0-SNAPSHOT-jar-with-dependencies.jar "E:\IR\HW3\final corpus" "E:\IR\HW3\output" 1 
 $ java -jar hw3-1.0-SNAPSHOT-jar-with-dependencies.jar "E:\IR\HW3\final corpus" "E:\IR\HW3\output" 1 "termFreq"
 >> Above two examples are doing the same thing
-
 ============================================================================================================================
  _______________
 |		|
@@ -111,7 +106,6 @@ Term frequency tables sorted from most to least frequent terms.
 2) docFreqTable_for_2-grams.txt
 3) docFreqTable_for_3-grams.txt
 Document frequency tables sorted lexiographically by terms.
-
 ============================================================================================================================
  _______________
 |		|
@@ -130,33 +124,8 @@ the following file is created:
 /Task2/2D/unigramInvertedIndexWithTermPositions.txt
 
 This file contains inverted index of the format Term -> [docID, tf, [termPositions]]
-
 ============================================================================================================================
-Sources used :
-
-- https://jsoup.org/
-- https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html
-
-============================================================================================================================
-Submission : Directory Structure
-
-code	| /ir	| Maven Project (source code)	      
-			      
-Task2	| /2B 	| 3 files as discussed above  
-	| /2C	| 3 files as discussed above  
-	| /2D   | 1 file  as discussed above
-
-Task3	| /3-1 	| 3 files as discussed above  
-	| /3-2	| 3 files as discussed above 
-	|       |
-	| /3-3	| StopListAnalysisFiles : 3 files (for n-grams n=1,2,3) - contains the following columns : Term, tf, df
-	|	| term as fraction of total terms in corpus
-	|   	| explaination.txt : explaining cutoff thresholds for stoplists
-	|       | stopList_for_1-grams.txt 
-	|       | stopList_for_2-grams.txt
-	|       | stopList_for_3-grams.txt
-============================================================================================================================
-DESIGN CHOICES
+DESIGN
 
 To maintain clarity, I have solved the assignment in two logical parts.
 There are two modules - a parser and an indexer.
@@ -168,8 +137,4 @@ The indexer module can be extened to generate inverted indexes of any posting fo
 The two posting types (docId, termfreq) and  (docId, termfreq, termpositions) are very easily implemented by making relevant 
 classes which implement Posting interface.
 
-To reduce seek time, Maps have been used. HashMap implementation provides fast operations and use less memory.
-Use of Lambda functions and Streams made the code cleaner and allow parallelsim which reduced the program run time.
-
 ============================================================================================================================
-_____________________________________________________________________________________________________________________
